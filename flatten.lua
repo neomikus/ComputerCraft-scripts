@@ -22,6 +22,7 @@ function    refuel(steps)
 
     while turtle.getFuelLevel() < steps do
         turtle.refuel(1)
+    end
 end
 
 function    select_filler_block()
@@ -30,8 +31,9 @@ function    select_filler_block()
     if turtle.getItemDetail(getSelectedSlot()).name == block_to_fill then return true end
 
     while i <= 16 do
-        if turtle.getItemDetail(i).name == block_to_fill
+        if turtle.getItemDetail(i).name == block_to_fill then
             turtle.select(i)
+        end
         i = i + 1
     end
     
@@ -44,11 +46,13 @@ function    select_filler_block()
 end
 
 function    fill_ground()
-    if not select_filler_block() then return
+    if not select_filler_block() then return end
     
-    if not turtle.compareDown()
+    if not turtle.compareDown() then
         turtle.digDown()
         turtle.placeDown()
+    end
+end
 
 function    mine_upwards(mined)
     local falling = 0
@@ -65,9 +69,10 @@ function    mine_upwards(mined)
             turtle.digUp()
         end
         moves = moves + falling
-        while falling > 0 then 
+        while falling > 0 do
             turtle.up()
             falling = falling - 1
+        end
         turtle.digUp()
         turtle.up()
         moves = moves + 1
@@ -90,7 +95,6 @@ function    turn(direction)
         while turtle.detect() do turtle.dig() end
         turtle.forward()
         turtle.turnRight()
-    end
     else
         fill_ground()
         mine_upwards(0)
@@ -104,6 +108,7 @@ end
 function    main()
     local mined = 0
 
+    if not arg[1] or not arg[2] then return end
     while y < arg[2] do
         if turtle.getFuelLevel() < max_x then 
            if not refuel(max_x) then return end
@@ -118,6 +123,7 @@ function    main()
             end
             turtle.forward()
             x = x + 1
+        end
         turn("right")
         if turtle.getFuelLevel() < max_x then 
             if not refuel(max_x) then return end
@@ -132,6 +138,7 @@ function    main()
             end
             turtle.forward()
             x = x - 1
+        end
         turn("left")
         y = y + 1 -- That LUA does not have a var++ or at least var += 1 is a crime against coding
     end
