@@ -28,7 +28,7 @@ end
 function    select_filler_block()
     local i = 1
 
-    if turtle.getItemDetail(getSelectedSlot()).name == block_to_fill then return true end
+    if turtle.getItemDetail(turtle.getSelectedSlot()).name == block_to_fill then return true end
 
     while i <= 16 do
         if turtle.getItemDetail(i).name == block_to_fill then
@@ -64,7 +64,8 @@ function    mine_upwards(mined)
     end
     while turtle.detectUp() do
         -- If there's a way to detect gravity in blocks it would be way better --
-        while turtle.InspectUp().name == 'Minecraft:gravel' or turtle.InspectUp().name == 'Minecraft:Sand' or turtle.InspectUp().name == 'Minecraft:Gravel' do
+        local is_block, data = turtle.InspectUp()
+        while is_block and data.name == 'Minecraft:gravel' or data.name == 'Minecraft:Sand' or data.name == 'Minecraft:Gravel' do
             falling = falling + 1
             turtle.digUp()
         end
@@ -109,7 +110,7 @@ function    main()
     local mined = 0
 
     if not arg[1] or not arg[2] then return end
-    while y < arg[2] do
+    while y < max_y do
         if turtle.getFuelLevel() < max_x then 
            if not refuel(max_x) then return end
         end
