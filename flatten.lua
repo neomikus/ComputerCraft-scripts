@@ -56,7 +56,7 @@ end
 
 function    mine_upwards(mined)
     local falling = 0
-    local moves = 0
+    local moves = mined
     
     while mined > 0 do
         turtle.up()
@@ -64,7 +64,7 @@ function    mine_upwards(mined)
     end
     while turtle.detectUp() do
         -- If there's a way to detect gravity in blocks it would be way better --
-        local is_block, data = turtle.InspectUp()
+        local is_block, data = turtle.inspectUp()
         while is_block and data.name == 'Minecraft:gravel' or data.name == 'Minecraft:Sand' or data.name == 'Minecraft:Gravel' do
             falling = falling + 1
             turtle.digUp()
