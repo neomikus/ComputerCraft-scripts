@@ -28,11 +28,12 @@ end
 function    select_filler_block()
     local i = 1
 
-    if turtle.getItemDetail(turtle.getSelectedSlot()).name == block_to_fill then return true end
+    if turtle.getItemDetail(turtle.getSelectedSlot()) and turtle.getItemDetail(turtle.getSelectedSlot()) == block_to_fill then return true end
 
     while i <= 16 do
-        if turtle.getItemDetail(i).name == block_to_fill then
+        if turtle.getItemDetail(i) and turtle.getItemDetail(i).name == block_to_fill then
             turtle.select(i)
+            break
         end
         i = i + 1
     end
@@ -112,13 +113,13 @@ function    main()
     if not arg[1] or not arg[2] then return end
     while y < max_y do
         if turtle.getFuelLevel() < max_x then 
-           if not refuel(max_x) then return end
+           if not refuel(max_x) then break end
         end
         while x < max_x do
             fill_ground()
             mine_upwards(mined)
             mined = 0
-            while turtle.detect() do 
+            while turtle.detect() do
                 turtle.dig()
                 mined = mined + 1
             end
@@ -126,14 +127,16 @@ function    main()
             x = x + 1
         end
         turn("right")
-        if turtle.getFuelLevel() < max_x then 
+        y = y + 1
+        if y >= max_y then break end
+        if turtle.getFuelLevel() < max_x then
             if not refuel(max_x) then return end
         end
         while x > 0 do
             fill_ground()
             mine_upwards(mined)
             mined = 0
-            while turtle.detect() do 
+            while turtle.detect() do
                 turtle.dig()
                 mined = mined + 1
             end
