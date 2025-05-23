@@ -19,23 +19,25 @@ function    Main()
 
 	local area = X * Y * Z
 	while turtle.getFuelLevel() ~= "unlimited" and turtle.getFuelLevel() < area do
-		local ok = turtle.refuel()
+		local ok = turtle.refuel(1)
 		if not ok then
 			print("Error: Not enough fuel for the task!")
 			return (0);
 		end
 	end
 
-	local y = 0
+
+	print(X, Y, Z)
 	local x = 0
+	local y = 0
 	local z = 0
 
 	while y < Y do
-		z = 0
 		
+		z = 0
 		while z < Z do
-			x = 0
 			
+			x = 0
 			while x < X do
 				turtle.dig()
 				turtle.forward()
@@ -64,7 +66,7 @@ function    Main()
 			turtle.digDown()
 			turtle.down()
 		end
-		
+
 		y = y + 1
 	end
 
