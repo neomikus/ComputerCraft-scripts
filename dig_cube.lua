@@ -31,10 +31,12 @@ function    Main()
 	local x = 0
 	local y = 0
 	local z = 0
+	local reverse = false
 
 	while y < Y do
 		
 		z = 0
+		reverse = not reverse
 		while z < Z do
 			
 			x = 0
@@ -44,17 +46,31 @@ function    Main()
 				x = x + 1
 			end
 
-			if not Left then
-				turtle.turnRight()
-				turtle.dig()
-				turtle.forward()
-				turtle.turnRight()
+			if not reverse then
+				if not Left then
+					turtle.turnRight()
+					turtle.dig()
+					turtle.forward()
+					turtle.turnRight()
+				else
+					turtle.turnLeft()
+					turtle.dig()
+					turtle.forward()
+					turtle.turnLeft()
+				end
 			else
-				turtle.turnLeft()
-				turtle.dig()
-				turtle.forward()
-				turtle.turnLeft()
-			end	
+				if Left then
+					turtle.turnRight()
+					turtle.dig()
+					turtle.forward()
+					turtle.turnRight()
+				else
+					turtle.turnLeft()
+					turtle.dig()
+					turtle.forward()
+					turtle.turnLeft()
+				end
+			end
 		
 			Left = not Left
 			
