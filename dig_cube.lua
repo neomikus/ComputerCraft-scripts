@@ -38,61 +38,60 @@ function    Main()
 	local z = 0
 	local reverse = false
 
-	while y < Y do
-		
-		z = 0
-		reverse = not reverse
-		while z < Z do
-			
-			x = 0
-			while x < X do
-				turtle.dig()
-				turtle.forward()
-				x = x + 1
-			end
 
-			z = z + 1
+	while y < Y do        
+        z = 0
+        reverse = not reverse
+        while z < Z do
+            
+            x = 0
+            while x < X do
+                turtle.dig()
+                turtle.forward()
+                x = x + 1
+            end
 
-			if not reverse and z < Z then
-				if not Left then
-					turtle.turnRight()
-					turtle.dig()
-					turtle.forward()
-					turtle.turnRight()
-				else
-					turtle.turnLeft()
-					turtle.dig()
-					turtle.forward()
-					turtle.turnLeft()
-				end
-				Left = not Left
-			elseif z < Z then
-				if Left then
-					turtle.turnRight()
-					turtle.dig()
-					turtle.forward()
-					turtle.turnRight()
-				else
-					turtle.turnLeft()
-					turtle.dig()
-					turtle.forward()
-					turtle.turnLeft()
-				end
-				Left = not Left
-			end
+            z = z + 1
 
-		end
+            if not reverse and z < Z then
+                if not Left then
+                    turtle.turnRight()
+                    turtle.dig()
+                    turtle.forward()
+                    turtle.turnRight()
+                else
+                    turtle.turnLeft()
+                    turtle.dig()
+                    turtle.forward()
+                    turtle.turnLeft()
+                end
+                Left = not Left
+            elseif z < Z then
+                if Left then
+                    turtle.turnRight()
+                    turtle.dig()
+                    turtle.forward()
+                    turtle.turnRight()
+                else
+                    turtle.turnLeft()
+                    turtle.dig()
+                    turtle.forward()
+                    turtle.turnLeft()
+                end
+                Left = not Left
+            end
+        end
 
-		if not Neg then
-			turtle.digUp()
-			turtle.up()
-		else
-			turtle.digDown()
-			turtle.down()
-		end
+        if not Neg then
+            turtle.digUp()
+            turtle.up()
+        else
+            turtle.digDown()
+            turtle.down()
+        end
 
-		y = y + 1
-	end
+        y = y + 1
+    end
 
 end
 
