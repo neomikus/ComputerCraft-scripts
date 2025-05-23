@@ -47,10 +47,12 @@ function    Main()
 			if not Left then
 				turtle.turnRight()
 				turtle.dig()
+				turtle.forward()
 				turtle.turnRight()
 			else
 				turtle.turnLeft()
 				turtle.dig()
+				turtle.forward()
 				turtle.turnLeft()
 			end	
 		
