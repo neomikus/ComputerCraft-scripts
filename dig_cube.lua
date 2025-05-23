@@ -66,7 +66,7 @@ function    Main()
 					turtle.turnLeft()
 				end
 				Left = not Left
-			else if z < Z then
+			elseif z < Z then
 				if Left then
 					turtle.turnRight()
 					turtle.dig()
@@ -93,7 +93,6 @@ function    Main()
 
 		y = y + 1
 	end
-
 
 end
 
