@@ -17,6 +17,11 @@ function    Main()
 		Y = Y * -1
 	end
 
+    if Z < 0 then
+        Left = true
+        Z = Z * -1
+    end
+
 	local area = X * Y * Z
 	while turtle.getFuelLevel() ~= "unlimited" and turtle.getFuelLevel() < area do
 		local ok = turtle.refuel(1)
@@ -27,16 +32,14 @@ function    Main()
 	end
 
 
-	print(X, Y, Z)
 	local x = 0
 	local y = 0
 	local z = 0
-	local reverse = true
+	local reverse = false
 
 	while y < Y do
 		
 		z = 0
-		reverse = not reverse
 		while z < Z do
 			
 			x = 0
@@ -45,7 +48,7 @@ function    Main()
 				turtle.forward()
 				x = x + 1
 			end
-
+            
             if z < Z - 1 then
                 if not reverse then
                     if not Left then
@@ -76,12 +79,12 @@ function    Main()
                 turtle.turnLeft()
                 turtle.turnLeft()
             end
-		
+            
 			Left = not Left
 			
 			z = z + 1
 		end
-
+        
 		if not Neg and y < Y - 1 then
 			turtle.digUp()
 			turtle.up()
@@ -89,7 +92,8 @@ function    Main()
 			turtle.digDown()
 			turtle.down()
 		end
-
+        
+        reverse = not reverse
 		y = y + 1
 	end
 
