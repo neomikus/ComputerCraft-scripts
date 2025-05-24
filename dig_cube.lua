@@ -17,11 +17,6 @@ function    Main()
 		Y = Y * -1
 	end
 
-	if Z < 0 then
-		Left = true
-		Z = Z * -1
-	end
-
 	local area = X * Y * Z
 	while turtle.getFuelLevel() ~= "unlimited" and turtle.getFuelLevel() < area do
 		local ok = turtle.refuel(1)
@@ -36,62 +31,68 @@ function    Main()
 	local x = 0
 	local y = 0
 	local z = 0
-	local reverse = false
+	local reverse = true
 
+	while y < Y do
+		
+		z = 0
+		reverse = not reverse
+		while z < Z do
+			
+			x = 0
+			while x < X do
+				turtle.dig()
+				turtle.forward()
+				x = x + 1
+			end
 
-	while y < Y do        
-        z = 0
-        reverse = not reverse
-        while z < Z do
-            
-            x = 0
-            while x < X do
-                turtle.dig()
-                turtle.forward()
-                x = x + 1
-            end
-
-            z = z + 1
-
-            if not reverse and z < Z then
-                if not Left then
-                    turtle.turnRight()
-                    turtle.dig()
-                    turtle.forward()
-                    turtle.turnRight()
+            if z < Z - 1 then
+                if not reverse then
+                    if not Left then
+                        turtle.turnRight()
+                        turtle.dig()
+                        turtle.forward()
+                        turtle.turnRight()
+                    else
+                        turtle.turnLeft()
+                        turtle.dig()
+                        turtle.forward()
+                        turtle.turnLeft()
+                    end
                 else
-                    turtle.turnLeft()
-                    turtle.dig()
-                    turtle.forward()
-                    turtle.turnLeft()
+                    if Left then
+                        turtle.turnRight()
+                        turtle.dig()
+                        turtle.forward()
+                        turtle.turnRight()
+                    else
+                        turtle.turnLeft()
+                        turtle.dig()
+                        turtle.forward()
+                        turtle.turnLeft()
+                    end
                 end
-                Left = not Left
-            elseif z < Z then
-                if Left then
-                    turtle.turnRight()
-                    turtle.dig()
-                    turtle.forward()
-                    turtle.turnRight()
-                else
-                    turtle.turnLeft()
-                    turtle.dig()
-                    turtle.forward()
-                    turtle.turnLeft()
-                end
-                Left = not Left
+            else
+                turtle.turnLeft()
+                turtle.turnLeft()
             end
-        end
+		
+			Left = not Left
+			
+			z = z + 1
+		end
 
-        if not Neg then
-            turtle.digUp()
-            turtle.up()
-        else
-            turtle.digDown()
-            turtle.down()
-        end
+		if not Neg and y < Y - 1 then
+			turtle.digUp()
+			turtle.up()
+        elseif y < Y - 1 then
+			turtle.digDown()
+			turtle.down()
+		end
 
-        y = y + 1
-    end
+		y = y + 1
+	end
+
 
 end
 
