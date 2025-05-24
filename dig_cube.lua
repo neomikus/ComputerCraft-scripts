@@ -93,6 +93,10 @@ function    Main()
 		y = y + 1
 	end
 
+    while y < 0 do
+        turtle.down()
+        y = y - 1
+    end
 
 end
 
