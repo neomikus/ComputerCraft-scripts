@@ -110,13 +110,14 @@ end
 function    main()
     local mined = 0
 
-    if not arg[1] or not arg[2] then return end
+    if not arg[1] or not arg[2] then print("Error: Not enough arguments") return end
 
     local left = false
-    if y < 0 then
-        y = y * -1
+    if max_y < 0 then
+        max_y = max_y * -1
         left = true
     end
+
     while y < max_y do
         if turtle.getFuelLevel() < max_x then
            if not refuel(max_x) then break end
