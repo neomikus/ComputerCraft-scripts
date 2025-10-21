@@ -111,8 +111,13 @@ function    main()
     local mined = 0
 
     if not arg[1] or not arg[2] then return end
+
+    if y < 0 then
+        y = y * -1
+        left = true
+    end
     while y < max_y do
-        if turtle.getFuelLevel() < max_x then 
+        if turtle.getFuelLevel() < max_x then
            if not refuel(max_x) then break end
         end
         while x < max_x do
@@ -126,7 +131,7 @@ function    main()
             turtle.forward()
             x = x + 1
         end
-        turn("right")
+        if left then turn("left") else turn("right") end
         y = y + 1
         if y >= max_y then break end
         if turtle.getFuelLevel() < max_x then
@@ -143,7 +148,7 @@ function    main()
             turtle.forward()
             x = x - 1
         end
-        turn("left")
+        if left then turn("left") else turn("right") end
         y = y + 1 -- That LUA does not have a var++ or at least var += 1 is a crime against coding
     end
 end
