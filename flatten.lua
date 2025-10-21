@@ -112,6 +112,7 @@ function    main()
 
     if not arg[1] or not arg[2] then return end
 
+    local left = false
     if y < 0 then
         y = y * -1
         left = true
@@ -148,7 +149,7 @@ function    main()
             turtle.forward()
             x = x - 1
         end
-        if left then turn("left") else turn("right") end
+        if left then turn("right") else turn("left") end
         y = y + 1 -- That LUA does not have a var++ or at least var += 1 is a crime against coding
     end
 end
